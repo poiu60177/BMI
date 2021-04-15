@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+
+    </style>
+</head>
+
+<body>
+    <h1>BMI計算機</h1>
+    <span>身高：</span><input type="text" id="height"><br>
+    <span>體重：</span><input type="text" id="weight"><br>
+    <button id="submit">計算</button>
+    <button id="clear">清除</button>
+    <div class="out-put">
+        <h2>結果顯示</h2>
+        <span>BMI值：</span><span class="result"></span><br>
+        <span>身體狀況：</span><br>
+        <span>健康建議：</span>
+    </div>
+    <script>
+
+
+
+        var submit = document.querySelector('#submit')
+        var height = document.querySelector('#height')
+        var weight = document.querySelector('#weight')
+        var result = document.querySelector('.result')
+        var clear = document.querySelector('#clear')
+
+        submit.onclick = function () {
+            if (height.value == 0) {
+                result.innerHTML = '請填入身高體重！'
+
+            } else if (weight.value == 0) {
+                result.innerHTML = '請填入身高體重！'
+            } else {
+                var y = (height.value) / 100
+                var y_square = y * y
+                var x = weight.value
+                var BMI = x / y_square
+                result.innerHTML = BMI
+            }
+        }
+        clear.onclick = function () {
+            height.value = ''
+            weight.value = ''
+        }
+    </script>
+</body>
+
+</html>
