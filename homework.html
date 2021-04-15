@@ -7,67 +7,211 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        * {
+            margin: 0%;
+            box-sizing: border-box;
+            font-family: Microsoft JhengHei;
+        }
+
+        body {
+            height: 100vh;
+            background-color: rgb(255, 255, 255);
+        }
+
+        h1 {
+            padding: 10px 0;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input {
+            font-size: 16px;
+            padding: 6px;
+        }
+
+        button {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 0 10px;
+        }
+
+        main {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 24px;
 
 
+        }
+
+        .container {
+            background-color: burlywood;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: crimson 2px solid;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .input-area {
+            display: flex;
+            margin-bottom: 5px;
+        }
+
+        .btn-group {
+            margin: 10px 0;
+        }
+
+        .out-put {
+            padding: 10px 30px;
+            width: 100%;
+            opacity: 0;
+
+        }
+
+        .display {
+            opacity: 1;
+            transition: 1s;
+        }
+
+        .night-mode {
+            background-color: rgb(41, 40, 40);
+            color: rgb(255, 255, 255);
+        }
+
+        .color-white {
+            color: rgb(255, 255, 255);
+           
+        }
+
+        .back-black {
+            background-color: black;
+        }
+        @media (max-width:760px){
+            main{
+                width:100% ;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <h1>BMI計算機</h1>
-    <span>身高：</span><input type="text" id="height"><br>
-    <span>體重：</span><input type="text" id="weight"><br>
-    <button id="submit">計算</button>
-    <button id="clear">清除</button>
-    <div class="out-put">
-        <h2>結果顯示</h2>
-        <span>BMI值：</span><span class="result"></span><br>
-        <span>身體狀況：<span class="body_status"></span></span><br>
-        <span>健康建議：<span class="health_status"></span></span>
-    </div>
+    <main>
+        <div class="btn-group">
+            <button id="night">夜間模式</button>
+        </div>
+        <div class="container">
+            <h1>BMI計算機</h1>
+            <div class="input-area">
+                <span>身高：</span><input type="number" id="height" placeholder="請輸入身高（公分）">
+            </div>
+            <div class="input-area">
+                <span>體重：</span><input type="number" id="weight" placeholder="請輸入體重（公斤）"><br>
+            </div>
+            <div class="btn-group"><button id="submit">計算</button>
+                <button id="clear">清除</button>
+            </div>
+
+        </div>
+        <div class="out-put">
+            <h2>結果顯示</h2>
+            <span>BMI值：</span><span class="result"></span><br>
+            <span>身體狀況：<span class="body_status"></span></span><br>
+            <span>健康建議：<span class="health_status"></span></span>
+        </div>
+    </main>
     <script>
 
-
+        var body = document.querySelector('body')
 
         var submit = document.querySelector('#submit')
         var height = document.querySelector('#height')
         var weight = document.querySelector('#weight')
         var result = document.querySelector('.result')
         var clear = document.querySelector('#clear')
+        var output = document.querySelector('.out-put')
+        var container = document.querySelector('.container')
+
         var body_status = document.querySelector('.body_status')
         var health_status = document.querySelector('.health_status')
-
+        var input_area = document.querySelector('.input-area')
+        var night = document.querySelector('#night')
 
         submit.onclick = function () {
             if (height.value == 0) {
-                result.innerHTML = '請填入身高體重！'
+                alert('請填入身高體重！')
 
             } else if (weight.value == 0) {
-                result.innerHTML = '請填入身高體重！'
+                alert('請填入身高體重！')
             } else {
                 var y = (height.value) / 100
                 var y_square = y * y
                 var x = weight.value
                 var BMI = x / y_square
-                result.innerHTML = BMI
-                if (BMI >= 40) {
+                result.innerHTML = Math.round(BMI * 100) / 100
 
+                output.classList.add('display')
+                if (BMI >= 35) {
+                    body_status.innerHTML = '重度肥胖'
+                    health_status.innerHTML = '該減肥囉^_^;'
+                } else if (BMI >= 30) {
+                    body_status.innerHTML = '中度肥胖'
+                    health_status.innerHTML = '差不多也該戒消夜了-_-'
+                } else if (BMI >= 27) {
+                    body_status.innerHTML = '輕度肥胖'
+                    health_status.innerHTML = '不能繼續成長囉>-<'
+                } else if (BMI >= 24) {
+                    body_status.innerHTML = '過重'
+                    health_status.innerHTML = ' 別在肥胖的邊緣試探._.;'
+                } else if (BMI >= 18.5) {
+                    body_status.innerHTML = '適中'
+                    health_status.innerHTML = '健康體態 繼續維持喔^-^'
+                } else if (BMI >= 0) {
+                    body_status.innerHTML = '過輕'
+                    health_status.innerHTML = '小心強風>-<'
+                } else {
+                    body_status.innerHTML = '居然會有負的？'
+                    health_status.innerHTML = '人類的健康建議可能幫不了您>-<'
                 }
-
-
-
-
-
 
             }
 
         }
 
-
-
-
         clear.onclick = function () {
             height.value = ''
             weight.value = ''
+            output.classList.remove('display')
+        }
+        night.onclick = function () {
+            if (container.classList.contains('night-mode')) {
+                container.classList.remove('night-mode')
+                output.classList.remove('color-white')
+                body.classList.remove('back-black')
+                night.innerHTML = '夜間模式'
+            }
+            else {
+                container.classList.add('night-mode')
+                output.classList.add('color-white')
+                body.classList.add('back-black')
+                night.innerHTML = '日間模式'
+            }
         }
     </script>
 </body>
