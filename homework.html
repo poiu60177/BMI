@@ -21,8 +21,8 @@
     <div class="out-put">
         <h2>結果顯示</h2>
         <span>BMI值：</span><span class="result"></span><br>
-        <span>身體狀況：</span><br>
-        <span>健康建議：</span>
+        <span>身體狀況：<span class="body_status"></span></span><br>
+        <span>健康建議：<span class="health_status"></span></span>
     </div>
     <script>
 
@@ -33,6 +33,9 @@
         var weight = document.querySelector('#weight')
         var result = document.querySelector('.result')
         var clear = document.querySelector('#clear')
+        var body_status = document.querySelector('.body_status')
+        var health_status = document.querySelector('.health_status')
+
 
         submit.onclick = function () {
             if (height.value == 0) {
@@ -46,8 +49,22 @@
                 var x = weight.value
                 var BMI = x / y_square
                 result.innerHTML = BMI
+                if (BMI >= 40) {
+
+                }
+
+
+
+
+
+
             }
+
         }
+
+
+
+
         clear.onclick = function () {
             height.value = ''
             weight.value = ''
